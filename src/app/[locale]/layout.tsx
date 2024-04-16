@@ -7,30 +7,9 @@ import { notFound } from 'next/navigation';
 import { AppConfig } from '@/utils/AppConfig';
 import Sidebar from "@/components/Sidebar.js"
 import MenuBar from "@/components/MenuBar.js"
-// export const metadata: Metadata = {
-//   icons: [
-//     {
-//       rel: 'apple-touch-icon',
-//       url: '/apple-touch-icon.png',
-//     },
-//     {
-//       rel: 'icon',
-//       type: 'image/png',
-//       sizes: '32x32',
-//       url: '/favicon-32x32.png',
-//     },
-//     {
-//       rel: 'icon',
-//       type: 'image/png',
-//       sizes: '16x16',
-//       url: '/favicon-16x16.png',
-//     },
-//     {
-//       rel: 'icon',
-//       url: '/favicon.ico',
-//     },
-//   ],
-// };
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from '@/store';
+
 
 export default function RootLayout(props: {
   children: React.ReactNode;
@@ -43,23 +22,27 @@ export default function RootLayout(props: {
   // Using internationalization in Client Components
 
   return (
-    <html lang={props.params.locale}>
-      <body>
-        <div className="min-h-screen">
-          <div className="flex">
-            <MenuBar setter={setShowSidebar} />
+    <ReduxProvider store={store}>
 
-            {/* <div> */}
+      <html lang={props.params.locale}>
+        <body>
+          <div className="min-h-screen">
+            <div className="flex">
+              <MenuBar setter={setShowSidebar} />
 
-            <Sidebar show={showSidebar} setter={setShowSidebar} />
-            {/* </div> */}
-            <div className="flex flex-col flex-grow w-screen  min-h-screen">
-              {props.children}
+              {/* <div> */}
+
+              <Sidebar show={showSidebar} setter={setShowSidebar} />
+              {/* </div> */}
+              <div className="flex flex-col flex-grow w-screen  min-h-screen">
+                {props.children}
+              </div>
             </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ReduxProvider>
+
   );
 }
 

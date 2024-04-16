@@ -26,10 +26,8 @@ const CardOutlline = (prop) => {
       </header>
 
       <div className={" flex-wrap " + (prop.col > 1 ? 'flex' : 'flex-1')}>
-
         {
           prop && prop?.details.map(m => (
-
             <div className={'py-4 px-5  border-r  hover:text-black ' + (' w-[' + 100 / prop.col + '%] ')} >
               {m}
             </div>
