@@ -6,20 +6,6 @@
 import { IoIosArrowDown } from "react-icons/io";
 import { PiStarThin } from "react-icons/pi";
 const CardRoom = (prop) => {
-
-  const number = [
-    {
-      items: [
-        1, 2, 4, 5,
-        1, 2, 4, 5,
-        1, 2, 4, 5,
-        1, 2, 4, 5,
-        1, 2, 4, 5,
-      ]
-    }
-
-
-  ]
   return (
     <>
       <div className='rounded-lg border-[1px] border-gray-400  mb-6 m-10 text-[#6A6A6A]'>
@@ -36,8 +22,7 @@ const CardRoom = (prop) => {
 
         <div className="carousel w-full">
           {
-
-            number.map((m, index) => {
+            prop?.details?.map((m, index) => {
               return (
                 <>
                   <div id={"slide" + (index + 1)} className="carousel-item relative w-full">
@@ -51,7 +36,7 @@ const CardRoom = (prop) => {
                                   <a className="gtm-forum-link-home-recommend gtm-forum-home-recommend-item01 gtm-forum-home-recommend-all" href="/forum" title="รวมกระทู้จากทุกห้อง" target="_blank">
                                     <PiStarThin />
                                     <span className="text-sm">
-                                      รวมมิตร
+                                     {n.name}
                                     </span>
                                   </a>
                                 </div>
@@ -63,8 +48,8 @@ const CardRoom = (prop) => {
 
                     </ul>
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href={"#slide" + (index === 0 ? number.length : index)} className="btn btn-circle">❮</a>
-                      <a href={"#slide" + (((index + 1) === number.length) ? 1 : (index + 2))} className="btn btn-circle">❯</a>
+                      <a href={"#slide" + (index === 0 ?    prop?.details.length : index)} className="btn btn-circle">❮</a>
+                      <a href={"#slide" + (((index + 1) ===    prop?.details.length) ? 1 : (index + 2))} className="btn btn-circle">❯</a>
                     </div>
                   </div>
                 </>

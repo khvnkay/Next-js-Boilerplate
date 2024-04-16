@@ -1,39 +1,156 @@
+"use client"
 
 import CardOutlline from '@/components/CardOutlline';
 import CardHighlight from '@/components/CardHighlight';
 import CardRoom from '@/components/CardRoom';
 import { IoMdArrowRoundForward } from "react-icons/io";
+import { useEffect, useState } from 'react';
+import { useGetSidebarContentMutation, useGetRoomRecommendMutation, useGetHighlightMutation, useGetSuggestTopicPopularMutation } from '@/store/reducers/auth/authApiSlice'
 
-export async function generateMetadata() {
- 
 
-  return {
-    title:"Pantip Learn,Share & Fun"  ,
-    description: "Learn,Share & Fun" ,
-  };
-}
 
 export default function Index() {
-  const details = [
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-    "[Pantip Point of August] ชวนมาบอก ‘รักแม่ให้โลกรู้’ 💕 กับ กิจกรรมตลอดเดือน สิงหาคม 2021",
-  ]
+  const [getSidebarContent] = useGetSidebarContentMutation()
+  const [getRoomRecommend] = useGetRoomRecommendMutation()
+  const [getHightLight] = useGetHighlightMutation()
+  const [getSuggestTopicPopular] = useGetSuggestTopicPopularMutation()
+  const [data, setData] = useState([])
+  const [rooms, setRooms] = useState([])
+  const [hightLight, setHightLight] = useState([])
+  const [songkran, setSongKran] = useState([])
+  const [tag, setTag] = useState([])
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getSidebarContent({}).unwrap()
+        if (data) {
+          setData(data.data)
+        } else {
+
+        }
+
+      } catch (err) {
+      }
+
+
+    }
+    const getHightLightApi = async () => {
+      try {
+        const data = await getHightLight({}).unwrap()
+        if (data) {
+          var realData: any = []
+          var arrayOfArrays = splitData(data.data, 4)
+          arrayOfArrays.forEach(e => {
+            realData.push({
+              items: e
+            })
+
+          })
+          setHightLight(realData)
+        } else {
+
+        }
+
+      } catch (err) {
+      }
+
+
+    }
+
+    const splitData = (arr: string | any[], size: number) => {
+      var arrayOfArrays = [];
+
+      for (var i = 0; i < arr.length; i += size) {
+        arrayOfArrays.push(arr.slice(i, i + size));
+      }
+
+      return arrayOfArrays
+
+    }
+    const getRooms = async () => {
+
+      try {
+        const data = await getRoomRecommend({}).unwrap()
+        if (data) {
+          var arr = data.data
+          var realData: any = []
+          var arrayOfArrays = splitData(arr, 20)
+          arrayOfArrays.forEach(e => {
+            realData.push({
+              items: e
+            })
+
+          })
+          setRooms(realData)
+        } else {
+
+        }
+
+      } catch (err) {
+      }
+
+
+    }
+    const getSongKran = async () => {
+
+      try {
+        const data = await getSuggestTopicPopular({
+          type: "room",
+          limit: 1
+        }).unwrap()
+        if (data) {
+
+          var arr = data.data[0].topics
+          let newData = arr?.map((m: any) => {
+            return { ...m, name: m.title }
+          })
+          setSongKran(newData)
+        } else {
+
+        }
+
+      } catch (err) {
+        console.log(err);
+
+      }
+
+
+    }
+    const getTag = async () => {
+
+      try {
+        const data = await getSuggestTopicPopular({
+          type: "tag",
+          limit: 2
+        }).unwrap()
+        if (data) {
+
+          var arr = data.data[0].topics
+          let newData = arr?.map((m: any) => {
+            return { ...m, name: m.title }
+          })
+          setTag(newData)
+        } else {
+
+        }
+
+      } catch (err) {
+        console.log(err);
+
+      }
+
+
+    }
+
+
+    getData()
+    getRooms()
+    getHightLightApi()
+    getSongKran()
+    getTag()
+
+  }, [])
+
   return (
     <>
 
@@ -55,27 +172,27 @@ export default function Index() {
       </div>
       <CardOutlline
         title='Announce'
-        details={details}
+        details={data}
         col={1}
       />
 
       <CardRoom
         title="เลือกห้อง"
-        details={details}
+        details={rooms}
       />
       <CardHighlight
         title="Highlight"
-        details={details}
+        details={hightLight}
       />
       <CardOutlline
-        title='Pantip Realtime'
-        details={details}
+        title='วันสงกรานต์'
+        details={songkran}
         subTitle="กระทู้ที่มีคนเปิดอ่านมากในขณะนี้ อัปเดตทุกนาที"
         col={2}
       />
       <CardOutlline
         title='Pantip Hitz'
-        details={details}
+        details={tag}
         subTitle="กระทู้ที่มีคนเปิดอ่านมากในขณะนี้ อัปเดตทุกนาที"
         col={1}
       />

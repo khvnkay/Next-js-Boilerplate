@@ -3,9 +3,10 @@
 // @ts-ignore
 import { IoIosArrowDown } from "react-icons/io";
 const CardOutlline = (prop) => {
+  console.log("prop",prop);
   return (
     <div className='rounded-lg border-[1px] border-gray-400  mb-6 m-10 text-[#6A6A6A]'>
-      <header className='border-b-[1px] border-gray-400 items-center px-4 py-4  '>
+      <header className='border-b-[1px] border-gray-400 w-full items-center px-4 py-4  '>
       <bold className="text-black">
               {prop.title}
             </bold>
@@ -24,11 +25,11 @@ const CardOutlline = (prop) => {
 
       </header>
 
-      <div className={" flex-wrap " + (prop.col > 1 ? 'flex' : 'flex-1')}>
+      <div className={" flex-wrap  flex" }>
         {
           prop && prop?.details.map(m => (
-            <div className={'py-4 px-5  border-r  hover:text-black ' + (' w-[' + 100 / prop.col + '%] ')} >
-              {m}
+            <div  key={m.name} className={'py-4 px-5  border-r  hover:text-black w-full' } >
+              {m.name}
             </div>
           ))
         }
@@ -44,8 +45,6 @@ const CardOutlline = (prop) => {
           </div>
 
         )
-
-
       }
 
 
