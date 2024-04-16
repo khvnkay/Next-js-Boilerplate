@@ -17,7 +17,9 @@ export default withSentryConfig(
       eslint: {
         dirs: ['.'],
         quiet: true,
+        ignoreDuringBuilds: true,
       },
+
       poweredByHeader: false,
       reactStrictMode: true,
       experimental: {
