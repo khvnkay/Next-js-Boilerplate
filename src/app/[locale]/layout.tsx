@@ -1,35 +1,36 @@
+
+"use client"
 import '@/styles/global.css';
+import React, { useState } from "react";
 
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
-
 import { AppConfig } from '@/utils/AppConfig';
-
-export const metadata: Metadata = {
-  icons: [
-    {
-      rel: 'apple-touch-icon',
-      url: '/apple-touch-icon.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/favicon-32x32.png',
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      url: '/favicon-16x16.png',
-    },
-    {
-      rel: 'icon',
-      url: '/favicon.ico',
-    },
-  ],
-};
+import Sidebar from "@/components/Sidebar.js"
+import MenuBar from "@/components/MenuBar.js"
+// export const metadata: Metadata = {
+//   icons: [
+//     {
+//       rel: 'apple-touch-icon',
+//       url: '/apple-touch-icon.png',
+//     },
+//     {
+//       rel: 'icon',
+//       type: 'image/png',
+//       sizes: '32x32',
+//       url: '/favicon-32x32.png',
+//     },
+//     {
+//       rel: 'icon',
+//       type: 'image/png',
+//       sizes: '16x16',
+//       url: '/favicon-16x16.png',
+//     },
+//     {
+//       rel: 'icon',
+//       url: '/favicon.ico',
+//     },
+//   ],
+// };
 
 export default function RootLayout(props: {
   children: React.ReactNode;
@@ -37,19 +38,26 @@ export default function RootLayout(props: {
 }) {
   // Validate that the incoming `locale` parameter is valid
   if (!AppConfig.locales.includes(props.params.locale)) notFound();
+  const [showSidebar, setShowSidebar] = useState(true);
 
   // Using internationalization in Client Components
-  const messages = useMessages();
 
   return (
     <html lang={props.params.locale}>
       <body>
-        <NextIntlClientProvider
-          locale={props.params.locale}
-          messages={messages}
-        >
-          {props.children}
-        </NextIntlClientProvider>
+        <div className="min-h-screen">
+          <div className="flex">
+            <MenuBar setter={setShowSidebar} />
+
+            {/* <div> */}
+
+            <Sidebar show={showSidebar} setter={setShowSidebar} />
+            {/* </div> */}
+            <div className="flex flex-col flex-grow w-screen  min-h-screen">
+              {props.children}
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   );
