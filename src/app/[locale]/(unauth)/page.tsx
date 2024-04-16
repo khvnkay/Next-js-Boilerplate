@@ -1,18 +1,15 @@
-import { getTranslations } from 'next-intl/server';
+
 import CardOutlline from '@/components/CardOutlline';
 import CardHighlight from '@/components/CardHighlight';
 import CardRoom from '@/components/CardRoom';
 import { IoMdArrowRoundForward } from "react-icons/io";
 
-export async function generateMetadata(props: { params: { locale: string } }) {
-  const t = await getTranslations({
-    locale: props.params.locale,
-    namespace: 'Index',
-  });
+export async function generateMetadata() {
+ 
 
   return {
-    title: t('meta_title'),
-    description: t('meta_description'),
+    title:"Pantip Learn,Share & Fun"  ,
+    description: "Learn,Share & Fun" ,
   };
 }
 
