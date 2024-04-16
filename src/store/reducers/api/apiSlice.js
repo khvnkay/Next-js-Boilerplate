@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setCredentials, logOut, setError } from '../auth/authSlice'
-import { setShowLoader } from '../loader/loaderSlice'
+import { setCredentials, logOut } from '../auth/authSlice'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:8080',
@@ -22,13 +21,7 @@ const baseQuery = fetchBaseQuery({
 
 // @ts-ignore
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-    api.dispatch(setShowLoader(true))
     let result = await baseQuery(args, api, extraOptions)
-    setInterval(() => {
-        api.dispatch(setShowLoader(false))
-
-    }, 1000)
-
     // @ts-ignore
     if (result?.data?.responseHeader?.status === 'F') {
         // @ts-ignore

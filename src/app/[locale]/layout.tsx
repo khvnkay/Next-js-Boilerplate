@@ -25,12 +25,15 @@ export default function RootLayout(props: {
     <ReduxProvider store={store}>
 
       <html lang={props.params.locale}>
+        <header>
+        </header>
         <body>
           <div className="min-h-screen">
             <div className="flex">
               <MenuBar setter={setShowSidebar} />
 
               {/* <div> */}
+
 
               <Sidebar show={showSidebar} setter={setShowSidebar} />
               {/* </div> */}

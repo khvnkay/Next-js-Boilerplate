@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: { position: '', user: null, success: true, errorMessage: '' },
+    initialState: { position: '', user: null },
     reducers: {
         setCredentials: (state, action) => {
             const { user, sessionId } = action.payload
@@ -19,19 +19,11 @@ const authSlice = createSlice({
             // @ts-ignore
             state.sessionId = null
         },
-        setError: (state, action) => {
-            const { status, message } = action.payload
-            state.success = status === 'S'
-            state.errorMessage = message
-        },
-        clearError: (state) => {
-            state.success = true
-            state.errorMessage = ''
-        },
+    
     },
 })
 
-export const { setCredentials, logOut, setError, clearError } = authSlice.actions
+export const { setCredentials, logOut} = authSlice.actions
 
 export default authSlice.reducer
 
@@ -39,9 +31,5 @@ export default authSlice.reducer
 export const selectCurrentUser = (state) => state.auth.user
 // @ts-ignore
 export const selectCurrentToken = (state) => state.auth.token
-// @ts-ignore
-export const selectCurrentStatus = (state) => state.auth.success
-// @ts-ignore
-export const selectCurrentErrorMessage = (state) => state.auth.errorMessage
 
 

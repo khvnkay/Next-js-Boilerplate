@@ -9,10 +9,9 @@ const CardHighlight = (prop) => {
     <>
       <div className='rounded-lg border-[1px] border-gray-400  mb-6 m-10 max-w-[1539px] md:max-w-[1000px] text-[#6A6A6A]'>
         <header className='border-b-[1px] border-gray-400 items-center px-4 py-4  '>
-          <span className="">
-
-            {prop.title}
-          </span>
+        <bold className="text-black">
+              {prop.title}
+            </bold>
 
 
         </header>

@@ -6,10 +6,9 @@ const CardOutlline = (prop) => {
   return (
     <div className='rounded-lg border-[1px] border-gray-400  mb-6 m-10 text-[#6A6A6A]'>
       <header className='border-b-[1px] border-gray-400 items-center px-4 py-4  '>
-        <span className="  ">
-
-          {prop.title}
-        </span>
+      <bold className="text-black">
+              {prop.title}
+            </bold>
         <div>
 
           {

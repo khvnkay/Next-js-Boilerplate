@@ -26,7 +26,9 @@ const CardRoom = (prop) => {
         <header className='border-b-[1px] border-gray-400 items-center px-4 py-4  '>
           <span className="">
 
-            {prop.title}
+            <bold className="text-black">
+              {prop.title}
+            </bold>
           </span>
 
 
@@ -40,24 +42,24 @@ const CardRoom = (prop) => {
                 <>
                   <div id={"slide" + (index + 1)} className="carousel-item relative w-full">
                     <ul className=" flex flex-wrap" >
-                    {
-                      m?.items?.map((n, i) => {
-                        return (
+                      {
+                        m?.items?.map((n, i) => {
+                          return (
                             <li className="   w-[10%] border border-slate-100">
                               <div className=" border rounded-md p-2  m-2 ">
                                 <div className="">
-                                  <a class="gtm-forum-link-home-recommend gtm-forum-home-recommend-item01 gtm-forum-home-recommend-all" href="/forum" title="รวมกระทู้จากทุกห้อง" target="_blank">
-                                  <PiStarThin />
+                                  <a className="gtm-forum-link-home-recommend gtm-forum-home-recommend-item01 gtm-forum-home-recommend-all" href="/forum" title="รวมกระทู้จากทุกห้อง" target="_blank">
+                                    <PiStarThin />
                                     <span className="text-sm">
-                                    รวมมิตร
+                                      รวมมิตร
                                     </span>
                                   </a>
                                 </div>
                               </div>
                             </li>
-                        )
-                      })
-                    }
+                          )
+                        })
+                      }
 
                     </ul>
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
